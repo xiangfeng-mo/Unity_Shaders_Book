@@ -52,10 +52,11 @@ Shader "practice/specular_pixel_light"
             {
                 fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;
                 float3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);
+                float3 h = normalize(worldLightDir + i.worldViewDir);
                 
                 fixed3 diffuse = _LightColor0.rgb * _diffuseColor.rgb * saturate(dot(i.worldNormal, worldLightDir));
-                float3 worldReflecDir = normalize(reflect(-worldLightDir, i.worldNormal));
-                fixed3 specular = _LightColor0.rgb * _specularColor.rgb * pow(saturate(dot(i.worldViewDir, worldReflecDir)), _gloss);
+                // float3 worldReflecDir = normalize(reflect(-worldLightDir, i.worldNormal));
+                fixed3 specular = _LightColor0.rgb * _specularColor.rgb * pow(saturate(dot(i.worldNormal, h)), _gloss);
                 fixed3 color = ambient + diffuse + specular;
 
                 return fixed4(color, 1);

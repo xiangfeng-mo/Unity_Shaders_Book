@@ -36,7 +36,7 @@ Shader "practice/diffuse_vertex_light"
                 v2f o;
                 fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
                 
-                float3 normaldir = normalize(mul(i.normal, (float3x3)unity_WorldToObject));
+                float3 normaldir = normalize(mul(i.normal, (float3x3)unity_WorldToObject)); //变换法线需要从模型空间到世界空间的逆转置矩阵
                 float3 lightdir = normalize(_WorldSpaceLightPos0.xyz);
                 fixed4 clight = _LightColor0;
             
